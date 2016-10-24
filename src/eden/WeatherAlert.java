@@ -9,9 +9,10 @@ package eden;
  *
  * @author Maxwell
  */
-public class Day {
-    Month container;
-    DayOfWeek day;
-    int dayOfMonth;
-    boolean watered;
+class WeatherAlert {
+    private AlertType alert;
+    
+    public WeatherAlert(AlertType type){
+        alert = type;
+    }
 }

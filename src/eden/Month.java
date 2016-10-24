@@ -24,4 +24,11 @@ public class Month {
     public int get_month_id(){
         return month_id;
     }
+    
+    //Takes monthID and opens file, importing day data for that month, until 
+    //that month is ready for displaying.
+    public void getMonthData(){
+        
+    }
+    
 }

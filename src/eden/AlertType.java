@@ -9,9 +9,6 @@ package eden;
  *
  * @author Maxwell
  */
-public class Day {
-    Month container;
-    DayOfWeek day;
-    int dayOfMonth;
-    boolean watered;
+public enum AlertType {
+    FIRE, SHOOTER, FLOOD
 }
