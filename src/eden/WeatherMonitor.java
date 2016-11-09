@@ -17,7 +17,7 @@ public class WeatherMonitor {
     }
     
     private static WeatherAlert collectData(){
-        AlertType type = AlertType.FIRE;
+        AlertType type;
         WeatherAlert k = new WeatherAlert(type);
         return k;
         
