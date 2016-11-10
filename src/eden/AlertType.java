@@ -10,5 +10,5 @@ package eden;
  * @author Maxwell
  */
 public enum AlertType {
-    FIRE, SHOOTER, FLOOD
+    THUNDERSTORM, HAIL, BLIZZARD, FLOODING
 }

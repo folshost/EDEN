@@ -5,13 +5,14 @@
  */
 package eden;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Maxwell
  */
-public class Day {
-    Month container;
-    DayOfWeek day;
-    int dayOfMonth;
-    boolean watered;
+public interface DataManager<T> {
+    
+    public ArrayList<T> loadData(String filename);
+    
 }
