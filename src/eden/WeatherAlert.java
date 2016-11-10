@@ -15,4 +15,8 @@ class WeatherAlert {
     public WeatherAlert(AlertType type){
         alert = type;
     }
+    
+    public void setAlert(AlertType type){
+        alert = type;
+    }
 }

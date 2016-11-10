@@ -7,19 +7,28 @@ package eden;
 
 import eden.AlertType;
 
+
+import javafx.stage.Stage;
+
 /**
  *
  * @author Maxwell
  */
 public class WeatherMonitor {
-    public static void main(){
-        
-    }
     
-    private static WeatherAlert collectData(){
-        AlertType type;
-        WeatherAlert k = new WeatherAlert(type);
-        return k;
+    
+    public static void init(){
+        //while(true){
+            WeatherStatus.main();
+            WeatherStatus.main();
+                            
+            //try{
+                //Thread.sleep(1000);
+            //}
+            //catch(InterruptedException e){
+                System.out.println("Awakened!");
+            //}
+        //}
         
     }
 }
