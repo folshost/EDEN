@@ -78,17 +78,17 @@ public class WeatherMonitor {
   
     
     public static void init(){
-        while(true){
+        //while(true){
             WeatherMonitor.main();
             try{
                 System.out.println("Inside try catch!");
-                Thread.sleep(10000);
+                //Thread.sleep(10000);
                 System.out.println("After sleep!");
             }
-            catch(InterruptedException e){
+            catch(Error e){
                 System.out.println(e.getMessage());
             }
-        }
+        //}
                             
             
         
