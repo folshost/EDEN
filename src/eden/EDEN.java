@@ -40,6 +40,7 @@ public class EDEN extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         WeatherMonitor.init();
+        WeatherMonitor.init();
         
     }
 

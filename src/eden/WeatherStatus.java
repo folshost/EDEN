@@ -36,33 +36,33 @@ public class WeatherStatus{
         StringBuilder sb = new StringBuilder();
         URLConnection urlConnection = null;
         InputStreamReader input = null;
-        //try{
-            //URL url = new URL(WeatherStatus.APIKey); //Credit where credit is due, this is all from 
-            //urlConnection = url.openConnection();    //https://www.tutorialspoint.com/java/java_url_processing.htm
+        try{
+            URL url = new URL(WeatherStatus.APIKey); //Credit where credit is due, this is all from 
+            urlConnection = url.openConnection();    //https://www.tutorialspoint.com/java/java_url_processing.htm
                                                      //and http://crunchify.com/java-url-example-getting-text-from-url/
-            //if(urlConnection != null)
-                //urlConnection.setReadTimeout(60 * 1000);
-            //if(urlConnection != null && urlConnection.getInputStream() != null){
-                //input = new InputStreamReader(urlConnection.getInputStream());
-                //BufferedReader buff = new BufferedReader(input);
-                //if(buff != null){
+            if(urlConnection != null)
+                urlConnection.setReadTimeout(60 * 1000);
+            if(urlConnection != null && urlConnection.getInputStream() != null){
+                input = new InputStreamReader(urlConnection.getInputStream());
+                BufferedReader buff = new BufferedReader(input);
+                if(buff != null){
                     String line;
                     line = "<current><city id=\"4323288\" name=\"East Baton Rouge Parish\"><coord lon=\"-91.1\" lat=\"30.52\"></coord><country>US</country><sun rise=\"2016-11-10T12:26:42\" set=\"2016-11-10T23:09:42\"></sun></city><temperature value=\"66.2\" min=\"66.2\" max="
                             + "\"66.2\" unit=\"fahrenheit\"></temperature><humidity value=\"82\" unit=\"%\"></humidity><pressure value=\"1022\" unit=\"hPa\"></pressure><wind><speed value=\"4.7\" name=\"Gentle Breeze\"></speed><gusts></gusts><direction value=\"340\" code=\"NNW\" name=\"North-northwest\"></direction></wind><clouds value=\"1\" name=\"clear sky\"></clouds><visibility value=\"16093\"></visibility><precipitation mode=\"no\"></precipitation><weather number=\"504\" value=\"clear sky\" icon=\"01n\"></weather><lastupdate value=\"2016-11-10T00:53:00\"></lastupdate></current>\"";
  
                         System.out.println(line);
                         checkAPIFeedback(line);
-                    
-                //}
-            //}
-            //Object string = url.getContent();
+                }    
+               
+            }
+            Object string = url.getContent();
             
-            //System.out.println(string.toString());
+            System.out.println(string.toString());
             
-        //}
-        //catch(IOException e){
-            //System.out.println(e.getMessage());
-        //}
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
     }    
     
     
@@ -73,10 +73,12 @@ public class WeatherStatus{
             precip = true;
         int speedSubStringIndex = str.indexOf("weather number=");
         System.out.println(str.substring(speedSubStringIndex));
-        int weatherValue = Integer.parseInt(str.substring(speedSubStringIndex+16, speedSubStringIndex+19));
+        int weatherValue = Integer.parseInt(
+                str.substring(speedSubStringIndex+16, speedSubStringIndex+19));
         System.out.println(weatherValue);
-        if(weatherValue == 504){
-            Alert kay = new Alert(504);
+        AlertType iteration = AlertType.getAlertType(weatherValue);
+        if(iteration != null){
+            Alert alert = new Alert(iteration);
         }
             
             
