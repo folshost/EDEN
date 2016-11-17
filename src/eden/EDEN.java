@@ -12,10 +12,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
+import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.layout.Pane;
 /**
  *
- * @author Maxwell
+ * @author Maxwell Reeser
  */
 public class EDEN extends Application {
     
@@ -31,14 +34,48 @@ public class EDEN extends Application {
             }
         });
         
-        StackPane root = new StackPane();
+        
+        Button btn2 = new Button();
+        btn2.setText("Never!!!!");
+        btn2.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Hello World!");
+            }
+        });
+        
+        btn.setLayoutX(150);
+        btn.setLayoutY(100);
+        btn2.setLayoutX(150);
+        btn2.setLayoutY(200);
+        
+        Pane root = new Pane();
         root.getChildren().add(btn);
+        root.getChildren().add(btn2);
         
         Scene scene = new Scene(root, 300, 250);
         
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        AlertType alertType = WeatherMonitor.main();
+        if(alertType != null){
+            Stage stage = new Stage();
+            Group rootGroup = new Group();               
+            Scene alertScene = new Scene(rootGroup, 300, 250,Color.GOLD);        
+            Text text = new Text(25, 50, "Extreme weather has been detected"
+                + "in you area!\n\n\t\tIt is of the type:\n\t\t" + 
+                alertType.getTypeDescrip());
+        
+            rootGroup.getChildren().add(text);
+        
+            stage.setTitle("Alert!");
+            stage.setScene(alertScene);
+            stage.show();
+        }
+        
     }
 
     /**
