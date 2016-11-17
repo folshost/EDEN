@@ -7,7 +7,7 @@ package eden;
 
 /**
  *
- * @author Maxwell
+ * @author Maxwell Reeser
  */
 public enum AlertType {
     THUNDERSTORM(212, "Thunderstorm"), HAIL(906,"Hail"),
