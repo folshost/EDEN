@@ -1,3 +1,4 @@
+
 package eden;
 
 import java.io.FileNotFoundException;
@@ -14,6 +15,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.scene.Group;
+import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
+
 
 /**
  *
