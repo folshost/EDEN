@@ -26,6 +26,21 @@ public class EDEN extends Application {
     
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
+	AlertType alertType = WeatherMonitor.main();
+        if(alertType != null){
+            Stage stage = new Stage();
+            Group rootGroup = new Group();               
+            Scene alertScene = new Scene(rootGroup, 300, 250,Color.GOLD);        
+            Text text = new Text(25, 50, "Extreme weather has been detected"
+                + "in you area!\n\n\t\tIt is of the type:\n\t\t" + 
+                alertType.getTypeDescrip());
+        
+            rootGroup.getChildren().add(text);
+        
+            stage.setTitle("Alert!");
+            stage.setScene(alertScene);
+            stage.show();
+        }    
     	PlotDirectory pD = new PlotDirectory();
     	pD.loadPlotList();
     	
