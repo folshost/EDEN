@@ -22,7 +22,7 @@ public class PlotDirectory{
 	}
 	
 	public void loadPlotList() throws FileNotFoundException {
-		File[] plots = new File("C:\\path\\to\\files").listFiles();
+		File[] plots = new File("C:\\Users\\Layne\\workspace\\EDEN\\plots").listFiles();
 		
         for(File file : plots) {
             if (file.getName().endsWith(".txt")) {
@@ -60,6 +60,7 @@ public class PlotDirectory{
 			pW.print(plot.getDate() + " ");
 			pW.print(plot.getLastWatered());
 			pW.println();
+			pW.close();
 		}
 	}
 }
