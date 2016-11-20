@@ -46,6 +46,7 @@ public class EDEN extends Application {
             stage.setScene(alertScene);
             stage.show();
         }    
+        
     	PlotDirectory pD = new PlotDirectory();
     	pD.loadPlotList();
     	
@@ -84,7 +85,7 @@ public class EDEN extends Application {
     	imgV = new ImageView();
     	
     	BorderPane root = new BorderPane();
-    	root.setPadding(new Insets(10));
+        root.setPadding(new Insets(10));
     	
     	root.setTop(btnBox);
     	root.setCenter(imgV);
