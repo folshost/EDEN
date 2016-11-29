@@ -1,5 +1,6 @@
 package eden;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Plot {
@@ -7,6 +8,7 @@ public class Plot {
 	private int width, length;
 	private Date creationDate;
 	private Date lastWatered;
+	private SimpleDateFormat sdf;
 	
 	public Plot(String name, int width, int length, Date creationDate, Date lastWatered) {
 		this.name = name;
@@ -14,6 +16,7 @@ public class Plot {
 		this.length = length;
 		this.creationDate = creationDate;
 		this.lastWatered = lastWatered;
+		sdf = new SimpleDateFormat("MM dd yyyy");
 	}
 	
 	public String getName() {
@@ -29,10 +32,10 @@ public class Plot {
 	}
 	
 	public String getCreationDate() {
-		return creationDate.getDay() + " " + creationDate.getMonth() + " " + creationDate.getYear();
+		return sdf.format(creationDate);
 	}
 	
 	public String getLastWatered() {
-		return lastWatered.getDay() + " " + lastWatered.getMonth() + " " + creationDate.getYear();
+		return sdf.format(lastWatered);
 	}
 }
