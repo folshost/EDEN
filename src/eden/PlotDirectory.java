@@ -24,14 +24,11 @@ public class PlotDirectory{
 		return plotList;
 	}
 	
-<<<<<<< HEAD
-	public void loadPlotList() throws FileNotFoundException {
-		File[] plots = new File("C:\\Users\\Maxwell\\Documents\\NetBeansProject\\EDEN\\plots").listFiles();
-=======
+
 	public void loadPlotList() throws FileNotFoundException, ParseException {
-		File[] plots = new File("C:\\Users\\Layne\\workspace\\EDEN\\plots").listFiles();
+		File[] plots = new File("C:\\Users\\Maxwell\\Documents\\NetBeansProject\\EDEN\\plots").listFiles();
 		SimpleDateFormat sdf = new SimpleDateFormat("MM dd yyyy");
->>>>>>> refs/remotes/origin/master
+
 		
 		for (File file : plots) {
 			if (file.getName().endsWith(".txt")) {

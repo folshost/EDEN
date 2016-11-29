@@ -20,6 +20,7 @@ import javafx.scene.Group;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 
+import java.text.ParseException;
 
 /**
  *
@@ -33,7 +34,12 @@ public class EDEN extends Application {
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
 
-    	pD.loadPlotList();
+        try{
+            pD.loadPlotList();
+        }catch(ParseException e){
+            System.out.println(e.getMessage());
+        }
+    	
     	Button btn;
     	
     	HBox btnBox = new HBox();
