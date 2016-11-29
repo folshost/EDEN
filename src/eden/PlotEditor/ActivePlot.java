@@ -23,16 +23,6 @@ public final class ActivePlot {
         currentPlot = plot;
         plotGrid = new PlotGrid(plot.getWidth(), plot.getLength());
         PLFilePath = System.getProperty("user.dir") + File.separator + 
-<<<<<<< HEAD
-                     "savedplots" + File.separator + 
-                     currentPlot.getName();
-        System.out.println(PLFilePath);
-        //try {
-            //loadPlants();
-        //} //catch (FileNotFoundException ex) {
-            //Logger.getLogger(ActivePlot.class.getName()).log(Level.SEVERE, null, ex);
-        //}
-=======
                      "plantlists" + File.separator + 
                      currentPlot.getName() + ".plantlist";
         try {
@@ -40,7 +30,7 @@ public final class ActivePlot {
         } catch (IOException ex) {
             Logger.getLogger(ActivePlot.class.getName()).log(Level.SEVERE, null, ex);
         }
->>>>>>> refs/remotes/origin/master
+
     }
     
     public void loadPlants() throws IOException {
