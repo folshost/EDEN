@@ -2,27 +2,78 @@ package eden.PlotEditor;
 
 import eden.Plot;
 import eden.PlotEditor.Plant.PlantType;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class ActivePlot {
+public final class ActivePlot {
+    
     private final Plot currentPlot;
     private final PlotGrid plotGrid;
     private final ArrayList<Plant> plantList = new ArrayList<>();
     private final OperationHistory opHistory = new OperationHistory();
+    private String PLFilePath;
     
     public ActivePlot(Plot plot) {
         currentPlot = plot;
         plotGrid = new PlotGrid(plot.getWidth(), plot.getLength());
+        PLFilePath = System.getProperty("user.dir") + File.separator + 
+                     "savedplots" + File.separator + 
+                     currentPlot.getName();
+        try {
+            loadPlants();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ActivePlot.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void loadPlot() {
-        // to be implemented
+    public void loadPlants() throws FileNotFoundException {
+        File PLFile = new File(PLFilePath);
+        Scanner PLScanner = new Scanner(PLFile);
+        String regEx = "([A-Z a-z]+),(\\d),(\\d)";
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher m;
+        while (PLScanner.hasNext(pattern)) {
+            m = pattern.matcher(PLScanner.next(pattern));
+            String type = m.group(0);
+            int x = Integer.parseInt(m.group(1));
+            int y = Integer.parseInt(m.group(2));
+            loadPlant(type, x, y);
+        }
     }
     
-    public void savePlot() {
-        // to be implemented
+    public void savePlants() throws IOException {
+        File PLFile = new File(PLFilePath);
+        if (!PLFile.getParentFile().exists()) {
+            PLFile.getParentFile().mkdirs();
+        }
+        PLFile.createNewFile();
+        FileWriter plantListFW = new FileWriter(PLFile);
+        try (PrintWriter plantListPW = new PrintWriter(plantListFW)) {
+            for (Plant p : plantList) {
+                plantListPW.printf("%s,%d,%d%n", 
+                                   p.getTypeName(),
+                                   p.getXCoordinate(),
+                                   p.getYCoordinate());
+            }
+        }
+    }
+    
+    private boolean loadPlant(String plantType, int x, int y) {
+        PlantType type = PlantType.POTATOES;
+        for (PlantType pt : Plant.getPlantCatalog()) {
+            if (plantType.equals(pt.getName())) {
+                type = pt;
+                break;
+            }
+        }
+        Plant newPlant = new Plant(type, x, y);
+        PlantOperation addPlant = new POAddPlant(this, newPlant);
+        return addPlant.execute();
     }
     
     public boolean AddPlant(PlantType type, int x, int y) {
