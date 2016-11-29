@@ -19,20 +19,25 @@ public final class ActivePlot {
     private String PLFilePath;
     
     public ActivePlot(Plot plot) {
+        
         currentPlot = plot;
         plotGrid = new PlotGrid(plot.getWidth(), plot.getLength());
         PLFilePath = System.getProperty("user.dir") + File.separator + 
-                     "savedplots" + File.separator + 
-                     currentPlot.getName();
+                     "plantlists" + File.separator + 
+                     currentPlot.getName() + ".plantlist";
         try {
             loadPlants();
-        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(ActivePlot.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void loadPlants() throws FileNotFoundException {
+    public void loadPlants() throws IOException {
         File PLFile = new File(PLFilePath);
+        if (!PLFile.getParentFile().exists()) {
+            PLFile.getParentFile().mkdirs();
+        }
+        PLFile.createNewFile();
         Scanner PLScanner = new Scanner(PLFile);
         String regEx = "([A-Z a-z]+),(\\d),(\\d)";
         Pattern pattern = Pattern.compile(regEx);
