@@ -25,14 +25,18 @@ import javafx.scene.paint.Color;
  * @author Maxwell
  */
 public class EDEN extends Application {
-	PlotDirectory pD = new PlotDirectory();
-	ImageView imgV;
-	Button btnI;
+    PlotDirectory pD = new PlotDirectory();
+    ImageView imgV;
+    Button btnI;
     
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
+<<<<<<< HEAD
 
     	PlotDirectory pD = new PlotDirectory();
+=======
+    	//PlotDirectory pD = new PlotDirectory(); // Not necessary because pD is already declared & initialized in the field
+>>>>>>> refs/remotes/origin/master
     	pD.loadPlotList();
     	Button btn;
     	
@@ -48,16 +52,16 @@ public class EDEN extends Application {
     	root.setCenter(imgV);
     	
     	for(int i = 0; i <= pD.getList().size() - 1; i++) {
-    			btn = new Button(pD.getList().get(i).getName());
-    			btnBox.getChildren().addAll(btn);
-    			btn.setOnAction(e->{
-					try {
-						handleButtonAction(e);
-						root.setBottom(btnI);
-					} catch (MalformedURLException e1) {
-						e1.printStackTrace();
-					}
-				});
+            btn = new Button(pD.getList().get(i).getName());
+            btnBox.getChildren().addAll(btn);
+            btn.setOnAction(e->{
+                try {
+                        handleButtonAction(e);
+                        root.setBottom(btnI);
+                } catch (MalformedURLException e1) {
+                        e1.printStackTrace();
+                }
+            });
     	}
     	
     	Scene scene = new Scene(root, 500, 600);
@@ -66,7 +70,7 @@ public class EDEN extends Application {
     	primaryStage.show();
     	
     	AlertType alertType = WeatherMonitor.main();
-    	if(alertType != null){
+    	if (alertType != null){
             Stage stage = new Stage();
             Group rootGroup = new Group();               
             Scene alertScene = new Scene(rootGroup, 300, 250,Color.GOLD);        
@@ -83,22 +87,22 @@ public class EDEN extends Application {
     }
     
     private void handleButtonAction(ActionEvent e) throws MalformedURLException {
-		Image img;
-		Button b = (Button) e.getSource();
-		String path = "file:C:\\Users\\Layne\\workspace\\EDEN\\plots\\" + b.getText() + ".bmp";
-		img = new Image(path);
-		imgV.setImage(img);
-		btnI = new Button("Load");
-		btnI.setOnAction(new EventHandler<ActionEvent>() {
+        Image img;
+        Button b = (Button) e.getSource();
+        String path = "file:C:\\Users\\Layne\\workspace\\EDEN\\plots\\" + b.getText() + ".bmp";
+        img = new Image(path);
+        imgV.setImage(img);
+        btnI = new Button("Load");
+        btnI.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("This should load " + b.getText() + ".");
             }
         });
-	}
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         launch(args);
     }
     

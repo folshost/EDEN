@@ -11,13 +11,11 @@ import java.util.Scanner;
 
 public class PlotDirectory{
 	
-	private static final List<Plot> plotList; 
+	private final ArrayList<Plot> plotList;
 	
 	public PlotDirectory() {
-		plotList = new ArrayList<Plot>();
+		plotList = new ArrayList<>();
 	}
-	
-	ArrayList<Plot> plotList;
 	
 	public ArrayList<Plot> getList() {
 		return plotList;
@@ -58,8 +56,8 @@ public class PlotDirectory{
 			PrintWriter pW = new PrintWriter(plotWriter);
 			pW.print(name + " ");
 			pW.print(plot.getWidth() + " ");
-			pW.print(plot.getHeight() + " ");
-			pW.print(plot.getDate() + " ");
+			pW.print(plot.getLength() + " ");
+			pW.print(plot.getCreationDate() + " ");
 			pW.print(plot.getLastWatered());
 			pW.println();
 			pW.close();
