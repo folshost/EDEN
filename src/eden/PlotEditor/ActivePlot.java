@@ -24,11 +24,12 @@ public final class ActivePlot {
         PLFilePath = System.getProperty("user.dir") + File.separator + 
                      "savedplots" + File.separator + 
                      currentPlot.getName();
-        try {
-            loadPlants();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ActivePlot.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        System.out.println(PLFilePath);
+        //try {
+            //loadPlants();
+        //} //catch (FileNotFoundException ex) {
+            //Logger.getLogger(ActivePlot.class.getName()).log(Level.SEVERE, null, ex);
+        //}
     }
     
     public void loadPlants() throws FileNotFoundException {

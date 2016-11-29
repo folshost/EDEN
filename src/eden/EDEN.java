@@ -21,7 +21,7 @@ import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 
 import java.text.ParseException;
-
+import eden.PlotEditor.*;
 /**
  *
  * @author Maxwell
@@ -42,9 +42,9 @@ public class EDEN extends Application {
     	
     	Button btn;
     	
-    	HBox btnBox = new HBox();
-    	btnBox.setSpacing(20);
-    	btnBox.setPadding(new Insets(20));
+    	//HBox btnBox = new HBox();
+    	//btnBox.setSpacing(20);
+    	//btnBox.setPadding(new Insets(20));
         
         
         GridPane painBox = new GridPane();
@@ -56,7 +56,7 @@ public class EDEN extends Application {
     	BorderPane root = new BorderPane();
         root.setPadding(new Insets(10));
     	
-    	root.setCenter(btnBox);
+    	//root.setCenter(btnBox);
     	//root.setCenter(imgV);
     	
         Text mainText = new Text(10, 10, "Welcome to Eden!");
@@ -69,11 +69,11 @@ public class EDEN extends Application {
             
             Text btnText = new Text("   Last Watered " + pD.getList().get(i).getLastWatered());
             painBox.add(btnText, 20, 2*i);
-
+            int k = i;
             //btnBox.getChildren().addAll(btn);
             btn.setOnAction(e->{
                 try {
-                        handleButtonAction(e);
+                        handleButtonAction(e,primaryStage, pD.getList().get(k));
                         root.setBottom(btnI);
                 } catch (MalformedURLException e1) {
                         e1.printStackTrace();
@@ -126,22 +126,95 @@ public class EDEN extends Application {
         } 
     }
     
-    private void handleButtonAction(ActionEvent e) throws MalformedURLException {
+    private void handleButtonAction(ActionEvent e, Stage stager, Plot plot) throws MalformedURLException {
         Image img;
         Button b = (Button) e.getSource();
-        String path = "file:C:\\Users\\Layne\\workspace\\EDEN\\plots\\" + b.getText() + ".bmp";
-        img = new Image(path);
-        imgV.setImage(img);
+        //String path = "file:C:\\Users\\Layne\\workspace\\EDEN\\plots\\" + b.getText() + ".bmp";
+        //img = new Image(path);
+        //imgV.setImage(img);
         btnI = new Button("Load");
+        
         btnI.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("This should load " + b.getText() + ".");
+                
+                openPlotGUI(plot, stager);
             }
         });
     }
 
+    
+    public static void openPlotGUI(Plot plot, Stage primaryStage){
+        
+        Stage stage = new Stage();
+        GridPane painBox = new GridPane();
+                
+        ActivePlot actPlot = new ActivePlot(plot);
+        String texter = "";       
+        Group rootGroup = new Group();               
+        Scene activeScene = new Scene(rootGroup, 300, 250,Color.GOLD);
+                
+        for(int i = 0; i<actPlot.getPlotGrid().getLength();i++){
+            System.out.println("Started " + i + " " + actPlot.getPlotGrid().getWidth());
+            for(int j = 0; j< actPlot.getPlotGrid().getWidth(); j++){
+            System.out.println("Started " + i + " " + j);
+                for(Plant k : actPlot.getPlantList()){
+                    if(k.getXCoordinate() == i && k.getYCoordinate() == j){
+                        Button a = new Button("P");
+                        a.setOnAction(new EventHandler<ActionEvent>(){
+                            @Override
+                            public void handle(ActionEvent event){
+                                //System.out.println(k.getPlantType().getName());
+                            }
+                                    
+                        });
+                        rootGroup.getChildren().add(a);
+                        System.out.println("Finished " + i + " " + j);
+                    }
+                    else{
+                        
+                    }
+                }   
+                int f = i;
+                int g = j;
+                    Button a = new Button("-");
+                        a.setOnAction(new EventHandler<ActionEvent>(){
+                            @Override
+                                public void handle(ActionEvent event){
+                                    System.out.println( "Added plant to " + f + " " + g);
+                                }
+                                    
+                        });
+                        
+                        painBox.add(a, i, j);
+                        //painBox.add(a, i, j);
+                        System.out.println("Finished " + i + "-" + j);
+                
+                
+               
+            }
+        }
+                
+                
+                
+        BorderPane root = new BorderPane();
+        root.setPadding(new Insets(10));
+        Text text = new Text(plot.getName());
+        root.setTop(text);        
+        root.setCenter(painBox);
+        Scene scene = new Scene(root, 500, 600);
+        
+        primaryStage.setTitle(plot.getName());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        
+        
+           
+        
+        
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }
