@@ -14,11 +14,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 
+import java.text.ParseException;
 
 /**
  *
@@ -31,24 +33,44 @@ public class EDEN extends Application {
     
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
-    	//PlotDirectory pD = new PlotDirectory(); // Not necessary because pD is already declared & initialized in the field
-    	pD.loadPlotList();
+
+        try{
+            pD.loadPlotList();
+        }catch(ParseException e){
+            System.out.println(e.getMessage());
+        }
+    	
     	Button btn;
     	
     	HBox btnBox = new HBox();
     	btnBox.setSpacing(20);
     	btnBox.setPadding(new Insets(20));
+        
+        
+        GridPane painBox = new GridPane();
+        
     	imgV = new ImageView();
     	
+        
+        
     	BorderPane root = new BorderPane();
-    	root.setPadding(new Insets(10));
+        root.setPadding(new Insets(10));
     	
-    	root.setTop(btnBox);
-    	root.setCenter(imgV);
+    	root.setCenter(btnBox);
+    	//root.setCenter(imgV);
     	
+        Text mainText = new Text(10, 10, "Welcome to Eden!");
+        root.setTop(mainText);
+        
     	for(int i = 0; i <= pD.getList().size() - 1; i++) {
             btn = new Button(pD.getList().get(i).getName());
-            btnBox.getChildren().addAll(btn);
+            
+            painBox.add(btn, 0, 2*i);
+            
+            Text btnText = new Text("   Last Watered " + pD.getList().get(i).getLastWatered());
+            painBox.add(btnText, 20, 2*i);
+
+            //btnBox.getChildren().addAll(btn);
             btn.setOnAction(e->{
                 try {
                         handleButtonAction(e);
@@ -58,12 +80,35 @@ public class EDEN extends Application {
                 }
             });
     	}
-    	
+    	root.setCenter(painBox);
     	Scene scene = new Scene(root, 500, 600);
     	primaryStage.setTitle("EDEN");
     	primaryStage.setScene(scene);
     	primaryStage.show();
     	
+        
+        Button weatherBtn = new Button("Check Weather");
+        weatherBtn.setOnAction(k->{
+            
+                AlertType alertType = WeatherMonitor.main();
+    	        if (alertType != null){
+                    Stage stage = new Stage();
+                    Group rootGroup = new Group();               
+                    Scene alertScene = new Scene(rootGroup, 300, 250,Color.GOLD);        
+                    Text text = new Text(25, 50, "Extreme weather has been detected"
+                        + " in you area!\n\n\t\tIt is of the type:\n\t\t" + 
+                    alertType.getTypeDescrip());
+        
+                    rootGroup.getChildren().add(text);
+        
+                    stage.setTitle("Alert!");
+                    stage.setScene(alertScene);
+                    stage.show();
+                
+            }
+        });
+        root.setRight(weatherBtn);
+        
     	AlertType alertType = WeatherMonitor.main();
     	if (alertType != null){
             Stage stage = new Stage();
