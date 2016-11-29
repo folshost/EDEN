@@ -1,23 +1,30 @@
 package eden;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 
 public class Plot {
 	private String name;
 	private int width, length;
-	private Date creationDate;
-	private Date lastWatered;
-	private SimpleDateFormat sdf;
+	private Calendar creationDate;
+	private Calendar lastWatered;
+        private static SimpleDateFormat sdf = new SimpleDateFormat("MM,dd,yyyy");
 	
-	public Plot(String name, int width, int length, Date creationDate, Date lastWatered) {
+	public Plot(String name, int width, int length, Calendar creationDate, Calendar lastWatered) {
 		this.name = name;
 		this.width = width;
 		this.length = length;
 		this.creationDate = creationDate;
 		this.lastWatered = lastWatered;
-		sdf = new SimpleDateFormat("MM dd yyyy");
 	}
+        
+        public Plot(String name, int width, int length) {
+                this.name = name;
+		this.width = width;
+		this.length = length;
+		this.creationDate = Calendar.getInstance();
+		this.lastWatered = Calendar.getInstance();
+        }
 	
 	public String getName() {
 		return name;
