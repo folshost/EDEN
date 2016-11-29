@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -21,13 +24,27 @@ public class PlotDirectory{
 		return plotList;
 	}
 	
+<<<<<<< HEAD
 	public void loadPlotList() throws FileNotFoundException {
 		File[] plots = new File("C:\\Users\\Maxwell\\Documents\\NetBeansProject\\EDEN\\plots").listFiles();
+=======
+	public void loadPlotList() throws FileNotFoundException, ParseException {
+		File[] plots = new File("C:\\Users\\Layne\\workspace\\EDEN\\plots").listFiles();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM dd yyyy");
+>>>>>>> refs/remotes/origin/master
 		
 		for (File file : plots) {
 			if (file.getName().endsWith(".txt")) {
 				Scanner plotScanner = new Scanner(file);
-				plotList.add(new Plot(plotScanner.next(), plotScanner.nextInt(), plotScanner.nextInt(), new Date(plotScanner.nextInt(), plotScanner.nextInt(), plotScanner.nextInt(), 0, 0), new Date(plotScanner.nextInt(), plotScanner.nextInt(), plotScanner.nextInt(), 0, 0)));
+				String name = plotScanner.next();
+				int width = plotScanner.nextInt();
+				int height = plotScanner.nextInt();
+				String createDateString = plotScanner.next() + " " + plotScanner.next() + " " + plotScanner.next(); // MM DD YYYY
+				String lastWateringDateString = plotScanner.next() + " " + plotScanner.next() + " " + plotScanner.next(); // MM DD YYYY
+				Date createDate = sdf.parse(createDateString);
+				Date lastWateringDate = sdf.parse(lastWateringDateString);
+				plotList.add(new Plot(name, width, height, createDate, lastWateringDate));
+				plotScanner.close();
 			}
 		}
 	}
