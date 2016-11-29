@@ -1,19 +1,25 @@
 package eden;
 
-import java.util.Date;
-
 public class Plot {
 	private String name;
 	private int width, length;
-	private Date creationDate;
-	private Date lastWatered;
+	private int monthC;
+	private int dayC;
+	private int yearC;
+	private int monthW;
+	private int dayW;
+	private int yearW;
 	
-	public Plot(String name, int width, int length, Date creationDate, Date lastWatered) {
+	public Plot(String name, int width, int length, int monthC, int dayC, int yearC, int monthW, int dayW, int yearW) {
 		this.name = name;
 		this.width = width;
 		this.length = length;
-		this.creationDate = creationDate;
-		this.lastWatered = lastWatered;
+		this.monthC = monthC;
+		this.dayC = dayC;
+		this.yearC = yearC;
+		this.monthW = monthW;
+		this.dayW = dayW;
+		this.yearW = yearW;
 	}
 	
 	public String getName() {
@@ -29,10 +35,10 @@ public class Plot {
 	}
 	
 	public String getCreationDate() {
-		return creationDate.getDay() + " " + creationDate.getMonth() + " " + creationDate.getYear();
+		return monthC + " " + dayC + " " + yearC;
 	}
 	
 	public String getLastWatered() {
-		return lastWatered.getDay() + " " + lastWatered.getMonth() + " " + creationDate.getYear();
+		return monthW + " " + dayW + " " + yearW;
 	}
 }
