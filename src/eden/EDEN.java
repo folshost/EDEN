@@ -60,7 +60,7 @@ public class EDEN extends Application {
             btn = new Button(pD.getList().get(i).getName());
             
             painBox.add(btn, 0, 2*i);
-            Text btnText = new Text("    " + pD.getList().get(i).getName() + " Last Watered " + pD.getList().get(i).getLastWatered());
+            Text btnText = new Text("   Last Watered " + pD.getList().get(i).getLastWatered());
             painBox.add(btnText, 20, 2*i);
 
             //btnBox.getChildren().addAll(btn);
