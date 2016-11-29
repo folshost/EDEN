@@ -19,7 +19,7 @@ public class OperationHistory {
     }
     
     public void addStep(PlantOperation newStep) {
-        if (previousSteps.size() == historyCapacity) { // ? consider new method for expression
+        if (previousSteps.size() >= historyCapacity) { // ? consider new method for expression
             previousSteps.removeLast(); // make room for new step
         }
         else if (nextStepExists()) {
