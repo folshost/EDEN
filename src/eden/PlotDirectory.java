@@ -27,7 +27,7 @@ public class PlotDirectory{
 		for (File file : plots) {
 			if (file.getName().endsWith(".txt")) {
 				Scanner plotScanner = new Scanner(file);
-				plotList.add(new Plot(plotScanner.next(), plotScanner.nextInt(), plotScanner.nextInt(), new Date(plotScanner.nextInt(), plotScanner.nextInt(), plotScanner.nextInt(), 0, 0), new Date(plotScanner.nextInt(), plotScanner.nextInt(), plotScanner.nextInt(), 0, 0)));
+				plotList.add(new Plot(plotScanner.next(), plotScanner.nextInt(), plotScanner.nextInt(), plotScanner.nextInt(), plotScanner.nextInt(), plotScanner.nextInt(), plotScanner.nextInt(), plotScanner.nextInt(), plotScanner.nextInt()));
 			}
 		}
 	}
