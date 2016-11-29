@@ -28,6 +28,7 @@ public class PlotDirectory{
                 }
 		File[] plots = PLDirectoryFile.listFiles();
 		for (File file : plots) {
+                    System.out.println(file.getName());
 			if (file.getName().endsWith(".txt")) {
 				Scanner plotScanner = new Scanner(file);
                                 plotScanner.useDelimiter(",");

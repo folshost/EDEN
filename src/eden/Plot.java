@@ -2,6 +2,7 @@ package eden;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class Plot {
 	private String name;
@@ -39,10 +40,10 @@ public class Plot {
 	}
 	
 	public String getCreationDate() {
-		return sdf.format(creationDate);
+		return "11 19 1996";
 	}
 	
 	public String getLastWatered() {
-		return sdf.format(lastWatered);
+		return "11 19 1996";
 	}
 }

@@ -30,6 +30,7 @@ public final class ActivePlot {
         } catch (IOException ex) {
             Logger.getLogger(ActivePlot.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
     
     public void loadPlants() throws IOException {
