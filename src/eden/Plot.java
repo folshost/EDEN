@@ -40,10 +40,10 @@ public class Plot {
 	}
 	
 	public String getCreationDate() {
-		return "11 19 1996";
+		return sdf.format(creationDate.getTime());
 	}
 	
 	public String getLastWatered() {
-		return "11 19 1996";
+		return sdf.format(lastWatered.getTime());
 	}
 }
